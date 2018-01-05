@@ -32,7 +32,7 @@ To use this script template, perform the following steps:
   
 _Note: these files are intended to be used with *Cacti 0.8.6 and 0.8.7 and PHP 5.2*, and may not operate as expected with other versions._
 
-##Script Input and Output
+## Script Input and Output
 In some cases you may want to execute the script file manually for debugging purposes. The parameters to the script use a fixed structure that is optimized for use with the Cacti poller, but also allows for human interaction.
 
 In particular, the script uses an SNMP protocol "bundle" of the following values, separated by colon characters: In those cases where a value is unneeded (such as SNMP v3 authentication credentials for an SNMP v2 query), or where a default value is adequate (such as the SNMP port number), the value can be omitted.
@@ -56,6 +56,5 @@ The output from the script contains the all of the data that is needed to popula
 The full exchange for these requests, using example data from above, are shown below:
 ```
 $ php ss_netsnmp_memory.php hostname:2:public::::::::
-totalReal:2059672 availReal:386380 totalSwap:4241144 availSwap:4224844 memBuffer:900
- memCached:1046992 usedReal:625400 usedSwap:16300
+totalReal:2059672 availReal:386380 totalSwap:4241144 availSwap:4224844 memBuffer:900 memCached:1046992 usedReal:625400 usedSwap:16300
 ```
