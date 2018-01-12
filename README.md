@@ -22,15 +22,16 @@ This script template is intended to overcome these shortcomings by fetching all 
 ## Installation
 To use this script template, perform the following steps:
 
-1. Download cacti-netsnmp-memory.0.7.tar.gz to a temporary directory on the Cacti server machine.
-2. Expand the archive with the command tar -xvzf cacti-netsnmp-memory.0.7.tar.gz, and change to the cacti-netsnmp-memory directory that is created.
+1. Download the latest release from [GitHub Releases](https://github.com/netniV/cacti-netsnmp-memory/releases) page to a temporary directory on the Cacti server machine.
+2. Expand the archive with the command tar -xvzf cacti-netsnmp-memory.<release>.tar.gz, and change to the cacti-netsnmp-memory directory that is created.
 3. Copy scripts/ss_netsnmp_memory.php to the <cacti>/scripts/ directory.
-4. Access the Cacti installation in a web browser, click on the "Import Templates" menu item on the left side of the Console screen, and import the template/Net-SNMP_memory_graph_template.xml file. Cacti should automatically create the required graph template, data input method, and data template objects.
+4. Access the Cacti installation in a web browser, click on the "Import Templates" menu item on the left side of the Console screen, and import the templates/netsnmp_memory_graph_template.xml file. Cacti should automatically create the required graph template, data input method, and data template objects.
 5. Click on the Devices menu item on the left side of the Console screen, select a *NIX host that is running Net-SNMP, and scroll down to the "Associated Graph Templates " table. Select "Host Memory - ucd/net - Memory Usage" in the "Add Graph Template " drop-down box, and click the "Add" button.
 6. After the Device screen reloads, verify that the "Host Memory - ucd/net - Memory Usage" graph template is now present, and then click the "Create Graphs for this Host" link at the top of the page.
 7. Locate the "Host Memory - ucd/net - Memory Usage" graph template, enable the checkbox to its right, and then scroll to the bottom of the page and click the "Create" button.
   
-_Note: these files are intended to be used with *Cacti 0.8.6 and 0.8.7 and PHP 5.2*, and may not operate as expected with other versions._
+_Note: Release 0.7 is intended to be used with *Cacti 0.8.6 and 0.8.7 and PHP 5.2*, and may not operate as expected with other versions._
+_Note: Release 1.0 is intended to be used with Cacti 1.x_
 
 ## Script Input and Output
 In some cases you may want to execute the script file manually for debugging purposes. The parameters to the script use a fixed structure that is optimized for use with the Cacti poller, but also allows for human interaction.
@@ -40,21 +41,22 @@ In particular, the script uses an SNMP protocol "bundle" of the following values
 - hostname: The domain name or IP address of the target device. This value is mandatory.
 - version: The version of SNMP to use. The remaining parameter values will be verified against this value, and is mandatory.
 - community: The SNMP community string to use. If version 1 or 2 was specified, the community string must be provided. If version 3 was specified, this value will be ignored.
+- port number: The UDP port number for the SNMP daemon on the target device. If a value is not specified, the default value of "161" will be used.
+- timeout: The number of seconds to wait for the SNMP query to be executed. If a value is not specified, the Cacti configuration will be read for a locally-defined default value.
 - v3 username: Part of the credentials for SNMP v3 queries. If version 1 or 2 was specified, this value will be ignored.
 - v3 password : Part of the credentials for SNMP v3 queries. If version 1 or 2 was specified, this value will be ignored.
 - v3 authentication protocol : Part of the credentials for SNMP v3 queries. If version 1 or 2 was specified, this value will be ignored.
 - v3 privilege password : Part of the credentials for SNMP v3 queries. If version 1 or 2 was specified, this value will be ignored.
 - v3 privilige protocol : Part of the credentials for SNMP v3 queries. If version 1 or 2 was specified, this value will be ignored.
 - v3 authentication context : Part of the credentials for SNMP v3 queries. If version 1 or 2 was specified, this value will be ignored.
-- port number: The UDP port number for the SNMP daemon on the target device. If a value is not specified, the default value of "161" will be used.
-- timeout: The number of seconds to wait for the SNMP query to be executed. If a value is not specified, the Cacti configuration will be read for a locally-defined default value.
 
-Taken as a whole, a valid SNMP bundle for the localhost device using SNMP v2 with the community string of "public" on the default port number and a default timeout would be "localhost:2:public::::::::".
+Taken as a whole, a valid SNMP bundle for the localhost device using SNMP v2 with the community string of "public" on the default port number and a default timeout would be "'localhost' '2' 'public' '' '' '' '' '' '' '' ''".
 
 The output from the script contains the all of the data that is needed to populate the RRD file and associated graph template.
 
 The full exchange for these requests, using example data from above, are shown below:
 ```
-$ php ss_netsnmp_memory.php hostname:2:public::::::::
+$ php ss_netsnmp_memory.php ss_netsnmp_memory '127.0.0.1' '2' 'public' '161' '500' '' '' '' '' '' ''
 totalReal:2059672 availReal:386380 totalSwap:4241144 availSwap:4224844 memBuffer:900 memCached:1046992 usedReal:625400 usedSwap:16300
 ```
+
