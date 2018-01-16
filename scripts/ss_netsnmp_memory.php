@@ -45,8 +45,8 @@ if (!isset($called_by_script_server)) {
 # main function
 #
 function ss_netsnmp_memory($hostname, $snmp_version, $snmp_community,
-	$snmp_port, $snmp_timeout, $snmp_auth_username, $snmp_auth_password,
-	$snmp_auth_protocol, $snmp_priv_passphrase, $snmp_priv_protocol, $snmp_context) {
+	$snmp_port, $snmp_timeout, $snmp_auth_username = '', $snmp_auth_password = '',
+	$snmp_auth_protocol = '', $snmp_priv_passphrase = '', $snmp_priv_protocol = '', $snmp_context = '') {
 
 	$ping_retries = 0;
 	$max_oids = 200;
