@@ -144,9 +144,8 @@ function ss_netsnmp_memory($hostname, $snmp_version, $snmp_community,
 #
 function ss_netsnmp_memory_syntax() {
 
-	print "Syntax: ss_netsnmp_memory.php <hostname> <snmp_version> <snmp_community>\ \n" .
-	"      [<snmp3_username> <snmp3_password> <snmp3_auth_protocol> <snmp3_priv_password>\ \n" .
-	"      [<snmp3_priv_protocol> <snmp3_context> <snmp_port>} <snmp_timeout> \n";
+	print "Syntax: ss_netsnmp_memory.php <hostname> <snmp_version> <snmp_community>\n" .
+	"       <snmp_port> <snmp_timeout> [<snmp3_username> <snmp3_password> <snmp3_auth_protocol>" .
+	"       [<snmp3_priv_password> <snmp3_priv_protocol> <snmp3_context>]]\n";
 }
-
 ?>
