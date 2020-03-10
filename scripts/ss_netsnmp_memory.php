@@ -60,7 +60,7 @@ function ss_netsnmp_memory($hostname, $snmp_version, $snmp_community,
 	#
 	# build a nested array of data elements for future use
 	#
-	$oids = array ("totalReal" => ".1.3.6.1.2.1.25.2.2.0",
+	$oids = array ("totalReal" => ".1.3.6.1.4.1.2021.4.5.0",
 		"availReal" => ".1.3.6.1.4.1.2021.4.6.0",
 		"totalSwap" => ".1.3.6.1.4.1.2021.4.3.0",
 		"availSwap" => ".1.3.6.1.4.1.2021.4.4.0",
@@ -117,8 +117,8 @@ function ss_netsnmp_memory($hostname, $snmp_version, $snmp_community,
 	#
 	# determine extra memory values, so somebody else doesn't have to
 	#
-	$mem_array['usedReal'] = ($mem_array['totalReal'] - ($mem_array['availReal'] +
-		$mem_array['memBuffer'] + $mem_array['memCached']));
+	$mem_array['usedReal'] = ($mem_array['totalReal'] - ($mem_array['availReal'] -
+		$mem_array['memBuffer'] - $mem_array['memCached']));
 
 	$mem_array['usedSwap'] = ($mem_array['totalSwap'] - $mem_array['availSwap']);
 
