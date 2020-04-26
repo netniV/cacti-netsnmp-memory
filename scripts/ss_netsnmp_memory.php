@@ -45,17 +45,11 @@ if (!isset($called_by_script_server)) {
 # main function
 #
 function ss_netsnmp_memory($hostname, $snmp_version, $snmp_community,
-	$snmp_port, $snmp_timeout, $snmp_auth_username = '', $snmp_auth_password = '',
+	$snmp_port, $snmp_timeout_ms, $snmp_auth_username = '', $snmp_auth_password = '',
 	$snmp_auth_protocol = '', $snmp_priv_passphrase = '', $snmp_priv_protocol = '', $snmp_context = '') {
 
 	$ping_retries = 0;
 	$max_oids = 200;
-
-	#
-	# Cacti's SNMP timeout uses milliseconds, while PHP uses Net-SNMP format, which is
-	# typically microseconds. Normalize by multiplying the timeout value by 1000.
-	#
-	$snmp_timeout = ($snmp_timeout * 1000);
 
 	#
 	# build a nested array of data elements for future use
@@ -75,7 +69,9 @@ function ss_netsnmp_memory($hostname, $snmp_version, $snmp_community,
 		#
 		# create the memory array element from the snmp query results
 		#
-		$mem_array[$label] = trim(cacti_snmp_get($hostname, $snmp_community, $oid, $snmp_version, $snmp_auth_username, $snmp_auth_password, $snmp_auth_protocol, $snmp_priv_passphrase, $snmp_priv_protocol, $snmp_context, $snmp_port, $snmp_timeout, $ping_retries, $max_oids, SNMP_POLLER));
+		$mem_array[$label] = trim(cacti_snmp_get($hostname, $snmp_community, $oid, $snmp_version,
+			$snmp_auth_username, $snmp_auth_password, $snmp_auth_protocol, $snmp_priv_passphrase,
+			$snmp_priv_protocol, $snmp_context, $snmp_port, $snmp_timeout_ms, $ping_retries, $max_oids, SNMP_POLLER));
 
 		#
 		# verify snmp response data
