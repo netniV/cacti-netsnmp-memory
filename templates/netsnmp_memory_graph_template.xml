@@ -929,7 +929,7 @@
 				<regexp_match></regexp_match>
 				<allow_nulls>on</allow_nulls>
 				<type_code>snmp_username</type_code>
-				<input_output>in</input_output>
+				<input_output>out</input_output>
 				<data_name>snmp3_username</data_name>
 			</hash_070101e3265a4de7e403ecb80cc36e0875aa67>
 			<hash_070101e8e8364aa007bc128f9dc6573edb80f2>
@@ -938,7 +938,7 @@
 				<regexp_match></regexp_match>
 				<allow_nulls></allow_nulls>
 				<type_code>snmp_priv_passphrase</type_code>
-				<input_output>in</input_output>
+				<input_output>out</input_output>
 				<data_name>snmp3_privpass</data_name>
 			</hash_070101e8e8364aa007bc128f9dc6573edb80f2>
 			<hash_070101eb8b1cb39b9c284ed08d77db79ae98f7>
@@ -947,7 +947,7 @@
 				<regexp_match></regexp_match>
 				<allow_nulls></allow_nulls>
 				<type_code>snmp_context</type_code>
-				<input_output>in</input_output>
+				<input_output>out</input_output>
 				<data_name>snmp3_context</data_name>
 			</hash_070101eb8b1cb39b9c284ed08d77db79ae98f7>
 			<hash_070101efb315ca833edf089a77eee2b43c61b6>
@@ -956,7 +956,7 @@
 				<regexp_match></regexp_match>
 				<allow_nulls></allow_nulls>
 				<type_code>snmp_priv_protocol</type_code>
-				<input_output>in</input_output>
+				<input_output>out</input_output>
 				<data_name>snmp3_privprot</data_name>
 			</hash_070101efb315ca833edf089a77eee2b43c61b6>
 		</fields>
